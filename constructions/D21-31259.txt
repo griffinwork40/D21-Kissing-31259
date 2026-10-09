@@ -1,0 +1,56 @@
+The lower bound for the kissing number in 21 dimensions is 31259.
+
+This construction extends Kevin Li's 30779-point configuration (github.com/Felpix-Studios/D19-D21-Kissing,
+commit 9bb343f, paper.pdf, "Improved kissing numbers in nineteen and twenty-one dimensions").
+All credit for the base construction belongs to Kevin Li.
+
+Base B' (27707 points, retained exactly from Li):
+  840 roots ±2e_i ± 2e_j (i < j, squared norm 8), and 26867 octad vectors:
+  210 × 128 = 26880 odd-sign vectors on the 210 weight-8 words of the extended binary
+  Golay code G restricted to coordinates 1-21, minus 13 deleted odd patterns on
+  Q = {3,6,10,11,16,18,20,21}:
+    +--+---+, +--+--+-, +-+--+--, +-+--+++, +-++-+-+,
+    +-++-++-, ++--++-+, ++--+++-, ++-+++--, ++-+++++,
+    +++-+-+-, +++++---, +++++-++
+  (115 odd patterns on Q retained.)
+
+Sign group (order 16):
+  Generators of Sigma = span of words (as sets of 1-indexed coordinates):
+    g1 = {1,4,7,8,12,14,15,17}  (word 92361 in 21-bit binary)
+    g2 = {1,5,7,8,13,15}        (word 20689)
+    g3 = {1,2,12,15,17,19}      (word 346115)
+    w  = {1,2,8,9,12,13,14}      (word 14723)
+  All generators miss Q, so every sign change S_h fixes the 13 deleted points.
+  Sigma_0 = span(g1,g2,g3) is a subgroup of order 8 inside C (the [21,9,6] subcode of D).
+
+New points derived from Li's 192 orbit representatives (3072 points):
+  Li's 192 sign patterns (words of D) are kept; their weights (coordinate magnitudes)
+  are jointly re-optimized, so these vectors differ from Li's originals.
+  New points = { S_h(r_i) : h in Sigma, i = 1..192 }, yielding 3072 vectors.
+  Li's 3072 sign words meet every coset of C: 512 words on each of cosets
+  1393, 1993, 2139, 2787 and 256 on each of 0, 696, 3370, 3986 (paper.pdf, Section 4.3).
+  All 3072 of Li's dense directions are replaced by re-weighted versions with the
+  same sign patterns; no original dense direction is unchanged.
+
+Additional new points (found by this work, N - 30779 = 480 points = 30 extra orbits of 16):
+  Starting from Li's 30779 configuration, joint numerical re-optimization of all 192 existing
+  orbit weights plus greedy sequential addition of orbits from the 1024 previously unused words
+  of D (the four cosets 0, 696, 3370, 3986 each contributed 256 unused words in Li's construction).
+  Greedy orbit insertion: at each step, optimize the weights of all already-included orbits
+  jointly with those of one candidate new orbit (16-point orbit of Sigma), accept the orbit if
+  exact integer rounding yields a VALID configuration under the frozen checker, and repeat.
+  30 additional orbits were successfully added, giving 222 orbits x 16 = 3552 new points total.
+  Integer scale approximately 1e9 (squared norms near 1e18, entries |v_i| in [1e8, 2.5e8]).
+
+Total: 27707 + 3552 = 31259 points.
+
+The exact vectors are the certificate and are listed in data/; this text explains how they were found and is not sufficient to rebuild them without the data.
+
+Verification:
+  * Frozen C checker: VALID on Mac arm64 and Linux x86_64.
+  * Li's check_pairs.py: 488,546,911 pairs, 0 violations, CHECK PASS.
+  * Standard-library scripts/check.py: VALID in about 6.5 minutes.
+  * Independent freshly written checker (lane V1): VALID in 1.6 seconds.
+
+Configuration file: data/D21_31259_plain.txt (one vector per line, 21 whitespace-separated integers).
+                    data/D21_31259_rays.txt  (squared norm then 21 integers, Li's format).
