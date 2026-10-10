@@ -1,4 +1,28 @@
-# A kissing configuration in R^21 with 31259 points
+# Kissing configurations in R^21: 31272 points (update), 31259 points (first release)
+
+**Update 2026-10-10: 31272 points.** `data/D21_31272_plain.txt` (and `data/D21_31272_rays.txt`, Li's rays format)
+is a kissing configuration in 21 dimensions with **31272 points**. It keeps the **full 27720-point Cohn-Li base with
+zero deletions** (the 13 base points Li's 30779 construction removed are restored) and places 3552 weighted
+sign-pattern points on the same 3552 words of D as the 31259 release (they form 222 orbits of Li's order-16 sign group).
+It lies in the full-base family whose ceiling, 31816, is proved by the certificates in `ceiling/`.
+
+Check it:
+
+```bash
+cc -O2 -o checker_c scripts/checker_c.c
+./checker_c data/D21_31272_plain.txt          # VALID, Points: 31272
+python3 path/to/D19-D21-Kissing/scripts/check_pairs.py data/D21_31272_rays.txt --n 21 --expect-rows 31272   # CHECK PASS
+```
+
+Receipts: frozen C checker VALID on Mac arm64 and Linux x86_64; Kevin Li's check_pairs.py CHECK PASS
+(488,953,356 pairs, 0 violations, smallest exact gap 9.07e-09, exact rational). Found 2026-10-09T17:03Z by an agent-afk lane
+(Claude Opus) that repaired the 31259 weights against the full base with an active-set L-BFGS solve, rounded to exact
+integers at scale ~1e9. Positive control: the same solver re-reached a VALID 31259 from perturbed weights (a method
+control, not a from-scratch rediscovery). Details in `PROVENANCE.md`. Credit as below: this extends Kevin Li's work.
+
+---
+
+## First release (2026-10-09): 31259 points
 
 This repository provides a kissing configuration in 21 dimensions with **31259 points**,
 improving the previous best known lower bound of 30779 due to Kevin Li (2026).
@@ -17,6 +41,8 @@ improving the previous best known lower bound of 30779 due to Kevin Li (2026).
 
 | Path | What |
 |---|---|
+| `data/D21_31272_plain.txt` | **31272** vectors (update), one per line, 21 integers |
+| `data/D21_31272_rays.txt` | Same, Li's rays format (squared norm then 21 integers) |
 | `constructions/D21-31259.txt` | Plain-text description of the construction |
 | `data/D21_31259_plain.txt` | 31259 vectors, one per line, 21 integers |
 | `data/D21_31259_rays.txt` | Same, Li's rays format (squared norm then 21 integers) |

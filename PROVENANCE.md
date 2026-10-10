@@ -121,3 +121,18 @@ Exit code: 0
   still be insertable with a different insertion order or larger weight deformations.
 - N = 31259 was subsequently rerun with the frozen C checker on Linux x86_64 (desk): VALID.
 - Full-base ceiling certificates from lanes/C1_ceiling are bundled unchanged in ceiling/; they do not bound configurations with base deletions. Attainability of 31816 remains open.
+
+## Update 2026-10-10: 31272 (full base, zero deletions)
+
+- 2026-10-09T17:03Z: lane M1b_attain (agent-afk, Claude Opus, laptop CPU) produced 31272 = all 27720 Cohn-Li base points
+  (Li's 13 deleted points restored) + 3552 weighted sign points on the same 3552 words of D as the 31259 release.
+  Method: starting from the 31259 weights, minimise a squared hinge over the exact full-base condition (all 1890 rows per
+  word) plus pairwise cos <= 1/2 - 3e-8 (active set), L-BFGS, then round to integers at scale ~1e9 and exact-check.
+  Positive control: from the 31259 weights perturbed log-normally (1e-3, 3e-2) the solver re-reached VALID 31259 files
+  (method control, not a from-scratch rediscovery).
+- 2026-10-09T17:08Z: frozen checker_c VALID on Mac arm64 (2.95 s) and Linux x86_64 desk (5.35 s); Kevin Li's
+  check_pairs.py CHECK PASS, 488,953,356 pairs, 0 violations.
+- Held private until Griffin's go (2026-10-10, ~02:00Z). Before release: novelty recheck (Li's repo HEAD unchanged since
+  2026-10-05T21:26Z; Cohn table d21 = 29768; newest arXiv kissing papers cover other dimensions), frozen checker rerun on
+  the repo copy (VALID, 31272 points), Li's check_pairs.py rerun on data/D21_31272_rays.txt (CHECK PASS, log in data/check_pairs_31272.log).
+- data/D21_31272_plain.txt sha256 361758425d2df467e98e5542a850431670048d0b4dd66b7c329f2837ce5d23fb
