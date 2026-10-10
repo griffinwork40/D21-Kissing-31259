@@ -1,0 +1,19 @@
+input data/D21_31288_rays.txt
+rows 31288; every stated norm equals the sum of squares
+distinct directions 31288
+rank 21: data rows [0, 1, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76] have exact determinant -4194304
+norm classes 224; max norm 1000000001321767454 (< 2^62); new rows (norm != 8) 3568
+pairs 489453828 (= N(N-1)/2), violations 0, contacts (cos = 1/2 exactly) 12988080
+Python-int recheck of 2055874 pairs (199953 random, the rest near 1/2, contacts or violations): {'ok': 2047943, 'contact': 7931, 'viol': 0}, 0 mismatches
+  base-base pairs  384185340  violations 0  contacts 12988080  fail cos<=1/2-1/L 0  within 1e-6 of 1/2 0
+  base-new  pairs   98904960  violations 0  contacts 0  fail cos<=1/2-1/L 0  within 1e-6 of 1/2 23648
+  new-new   pairs    6363528  violations 0  contacts 0  fail cos<=1/2-1/L 0  within 1e-6 of 1/2 18448
+  largest non-contact cosine base-base 0.250000000000  rows 0,969  gap 1.875000e-01
+  largest non-contact cosine base-new  0.499999970453  rows 22024,31245  gap 2.954693e-08
+  largest non-contact cosine new-new   0.499999970724  rows 30584,31202  gap 2.927570e-08
+  smallest exact gap base-new  236375414797/8000000002242792952 = 2.954693e-08  rows 22024,31245
+  smallest exact gap new-new   6505710459738431790391870769/222222222118152296674008227098155788 = 2.927570e-08  rows 30584,31202
+new pairs 105268488: cos <= 1/2 - 1/200000000 fails on 0
+smallest gap (nm-4g^2)/(4nm) over new pairs: 6505710459738431790391870769/222222222118152296674008227098155788 = 2.927570e-08, data rows 30584,31202, norms 999999999913465953, 999999999618219382
+time 35.4 s
+CHECK PASS

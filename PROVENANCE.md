@@ -136,3 +136,19 @@ Exit code: 0
   2026-10-05T21:26Z; Cohn table d21 = 29768; newest arXiv kissing papers cover other dimensions), frozen checker rerun on
   the repo copy (VALID, 31272 points), Li's check_pairs.py rerun on data/D21_31272_rays.txt (CHECK PASS, log in data/check_pairs_31272.log).
 - data/D21_31272_plain.txt sha256 361758425d2df467e98e5542a850431670048d0b4dd66b7c329f2837ce5d23fb
+
+## Update 2026-10-10 (second): 31288 (full base, zero deletions)
+
+- 2026-10-10T21:33Z: orbit-swap job S2 of lane M1b_attain (agent-afk; laptop CPU), started from the 31272 state (222 orbits of
+  Li's order-16 sign group), trial 131: removed 1 orbit, added 2 previously unused orbits, re-solved all orbit weights jointly
+  (penalty for cos > 1/2 - 3e-8 plus the exact full-base condition), max cos 0.49999997, rounded at scale ~1e9, frozen
+  checker VALID. Result: 27720 base + 3568 dense points on 3568 words of D (223 orbits) = 31288.
+- 2026-10-10T22:54Z-23:30Z verification: frozen checker_c VALID on Mac arm64 and Linux x86_64 (same sha256); Kevin Li's
+  check_pairs.py CHECK PASS (489,453,828 pairs, 0 violations, smallest exact gap 2.93e-08); an independently written
+  exact C checker (__int128, all pairs; mutated copies rejected) VALID; independent rebuild of the Golay octads confirms
+  840 roots + 26880 octad sign points + 3568 dense; the 27720 base points equal, point for point, the base of Kevin Li's
+  public 31272 file (Felpix-Studios/kissing-number), and Li's 30779 base is this base minus exactly 13 points.
+- Novelty recheck before release: Cohn table d21 = 31272; Li's repos unchanged since 2026-10-10T03:35Z (D21 file 31272);
+  arXiv:2609.35051 has no d21 result; GitHub search found nothing above 31272.
+- Released by Griffin's go ("whatever you think is best proceed", 2026-10-10). The search continues until 2026-10-11T21:55Z.
+- data/D21_31288_plain.txt sha256 b51b7b9c376ff226695a8b8c8f880e9202981deb7a6dd8f5f21d7598d9be064b

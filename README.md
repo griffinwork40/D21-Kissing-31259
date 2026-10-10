@@ -1,6 +1,34 @@
-# Kissing configurations in R^21: 31272 points (update), 31259 points (first release)
+# Kissing configurations in R^21: 31288 points (latest), 31272, 31259
 
-**Update 2026-10-10: 31272 points.** `data/D21_31272_plain.txt` (and `data/D21_31272_rays.txt`, Li's rays format)
+> **Search ongoing until 2026-10-11 ~22:00 UTC; the number may improve.** This notice will be removed when the run ends.
+
+**Update 2026-10-10 (second): 31288 points.** `data/D21_31288_plain.txt` (and `data/D21_31288_rays.txt`, Li's rays format)
+is a kissing configuration in 21 dimensions with **31288 points**: the **full 27720-point Cohn-Li base with zero deletions**
+plus 3568 weighted sign-pattern points on 3568 words of D (223 orbits of Li's order-16 sign group). It was obtained from the
+31272 configuration by an orbit swap: remove one orbit, add two previously unused orbits, re-solve all weights jointly,
+round to exact integers at scale ~1e9. It lies in the full-base family whose ceiling, 31816, is proved in `ceiling/`.
+
+Check it:
+
+```bash
+cc -O2 -o checker_c scripts/checker_c.c
+./checker_c data/D21_31288_plain.txt          # VALID, Points: 31288
+python3 path/to/D19-D21-Kissing/scripts/check_pairs.py data/D21_31288_rays.txt --n 21 --expect-rows 31288   # CHECK PASS
+```
+
+Receipts: frozen C checker VALID on Mac arm64 and Linux x86_64; Kevin Li's check_pairs.py CHECK PASS (489,453,828 pairs,
+0 violations, smallest exact gap 2.93e-08; log in `data/check_pairs_31288.log`); an independently written exact checker
+(128-bit integer arithmetic, all pairs) also returns VALID. The 27720 base points are identical, point for point, to the
+base of Kevin Li's own 31272 file. Found 2026-10-10T21:33Z by an agent-afk search lane (orbit-swap job). Details in `PROVENANCE.md`.
+
+**Credit.** This builds entirely on Kevin Li's construction. Kevin Li independently obtained a 31272-point configuration
+(github.com/Felpix-Studios/kissing-number), and the d = 21 entry of Henry Cohn's table cites both.
+
+---
+
+## Update 2026-10-10: 31272 points
+
+`data/D21_31272_plain.txt` (and `data/D21_31272_rays.txt`, Li's rays format)
 is a kissing configuration in 21 dimensions with **31272 points**. It keeps the **full 27720-point Cohn-Li base with
 zero deletions** (the 13 base points Li's 30779 construction removed are restored) and places 3552 weighted
 sign-pattern points on the same 3552 words of D as the 31259 release (they form 222 orbits of Li's order-16 sign group).
@@ -41,7 +69,10 @@ improving the previous best known lower bound of 30779 due to Kevin Li (2026).
 
 | Path | What |
 |---|---|
-| `data/D21_31272_plain.txt` | **31272** vectors (update), one per line, 21 integers |
+| `data/D21_31288_plain.txt` | **31288** vectors (latest), one per line, 21 integers |
+| `data/D21_31288_rays.txt` | Same, Li's rays format (squared norm then 21 integers) |
+| `data/check_pairs_31288.log` | Kevin Li's check_pairs.py run on the 31288 rays file |
+| `data/D21_31272_plain.txt` | 31272 vectors, one per line, 21 integers |
 | `data/D21_31272_rays.txt` | Same, Li's rays format (squared norm then 21 integers) |
 | `constructions/D21-31259.txt` | Plain-text description of the construction |
 | `data/D21_31259_plain.txt` | 31259 vectors, one per line, 21 integers |
